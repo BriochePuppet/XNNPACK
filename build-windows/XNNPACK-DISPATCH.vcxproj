@@ -1,0 +1,1472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{86717ec1-3276-4a72-a2b5-3d403762c226}</ProjectGuid>
+    <RootNamespace>XNNPACK-DISPATCH</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>XNN_ENABLE_ARM_FP16_VECTOR=0;XNN_ENABLE_ARM_FP16_SCALAR=0;XNN_ENABLE_ARM_BF16=0;XNN_ENABLE_ARM_DOTPROD=0;XNN_ENABLE_ARM_I8MM=0;XNN_ENABLE_RISCV_VECTOR=1;XNN_ENABLE_AVXVNNI=1;XNN_ENABLE_AVXVNNIINT8=1;XNN_ENABLE_AVX256SKX=1;XNN_ENABLE_AVX256VNNI=1;XNN_ENABLE_AVX256VNNIGFNI=1;XNN_ENABLE_AVX512VNNIGFNI=1;XNN_ENABLE_AVX512AMX=1;XNN_ENABLE_AVX512FP16=1;XNN_ENABLE_VSX=1;XNN_ENABLE_ASSEMBLY=1;XNN_ENABLE_MEMOPT=1;XNN_ENABLE_SPARSE=1;XNN_ENABLE_GEMM_M_SPECIALIZATION=1;XNN_ENABLE_DWCONV_MULTIPASS=0;XNN_ENABLE_HVX=1;XNN_ENABLE_KLEIDIAI=0;XNN_ENABLE_CPUINFO=1;XNN_LOG_LEVEL=4;FXDIV_USE_INLINE_ASSEMBLY=0;PTHREADPOOL_NO_DEPRECATED_API=1;CPUINFO_SUPPORTED_PLATFORM=1;CPUINFO_LOG_TO_STDIO=1;CPUINFO_LOG_LEVEL=2;_WIN32_WINNT=0x0601;NOMINMAX=1;NOGDI=1;WIN32_LEAN_AND_MEAN=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..;$(ProjectDir)\..\include;$(ProjectDir)\..\src;$(ProjectDir)\..\..\FP16\include;$(ProjectDir)\..\..\FXdiv\include;$(ProjectDir)\..\..\pthreadpool\include;$(ProjectDir)\..\..\cpuinfo\include;$(ProjectDir)\..\..\cpuinfo\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AssemblerListingLocation>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</ObjectFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <AdditionalOptions>-mavxvnni -mavxvnniint8 -mavx512fp16 -mavx512vnni -mavx512vbmi  -mgfni -mamx-tile -mamx-int8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>XNN_ENABLE_ARM_FP16_VECTOR=0;XNN_ENABLE_ARM_FP16_SCALAR=0;XNN_ENABLE_ARM_BF16=0;XNN_ENABLE_ARM_DOTPROD=0;XNN_ENABLE_ARM_I8MM=0;XNN_ENABLE_RISCV_VECTOR=1;XNN_ENABLE_AVXVNNI=1;XNN_ENABLE_AVXVNNIINT8=1;XNN_ENABLE_AVX256SKX=1;XNN_ENABLE_AVX256VNNI=1;XNN_ENABLE_AVX256VNNIGFNI=1;XNN_ENABLE_AVX512VNNIGFNI=1;XNN_ENABLE_AVX512AMX=1;XNN_ENABLE_AVX512FP16=1;XNN_ENABLE_VSX=1;XNN_ENABLE_ASSEMBLY=1;XNN_ENABLE_MEMOPT=1;XNN_ENABLE_SPARSE=1;XNN_ENABLE_GEMM_M_SPECIALIZATION=1;XNN_ENABLE_DWCONV_MULTIPASS=0;XNN_ENABLE_HVX=1;XNN_ENABLE_KLEIDIAI=0;XNN_ENABLE_CPUINFO=1;XNN_LOG_LEVEL=4;FXDIV_USE_INLINE_ASSEMBLY=0;PTHREADPOOL_NO_DEPRECATED_API=1;CPUINFO_SUPPORTED_PLATFORM=1;CPUINFO_LOG_TO_STDIO=1;CPUINFO_LOG_LEVEL=2;_WIN32_WINNT=0x0601;NOMINMAX=1;NOGDI=1;WIN32_LEAN_AND_MEAN=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;NDEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..;$(ProjectDir)\..\include;$(ProjectDir)\..\src;$(ProjectDir)\..\..\FP16\include;$(ProjectDir)\..\..\FXdiv\include;$(ProjectDir)\..\..\pthreadpool\include;$(ProjectDir)\..\..\cpuinfo\include;$(ProjectDir)\..\..\cpuinfo\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AssemblerListingLocation>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</ObjectFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <AdditionalOptions>-mavxvnni -mavxvnniint8 -mavx512fp16 -mavx512vnni -mavx512vbmi  -mgfni -mamx-tile -mamx-int8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>XNN_ENABLE_ARM_FP16_VECTOR=0;XNN_ENABLE_ARM_FP16_SCALAR=0;XNN_ENABLE_ARM_BF16=0;XNN_ENABLE_ARM_DOTPROD=0;XNN_ENABLE_ARM_I8MM=0;XNN_ENABLE_RISCV_VECTOR=1;XNN_ENABLE_AVXVNNI=1;XNN_ENABLE_AVXVNNIINT8=1;XNN_ENABLE_AVX256SKX=1;XNN_ENABLE_AVX256VNNI=1;XNN_ENABLE_AVX256VNNIGFNI=1;XNN_ENABLE_AVX512VNNIGFNI=1;XNN_ENABLE_AVX512AMX=1;XNN_ENABLE_AVX512FP16=1;XNN_ENABLE_VSX=1;XNN_ENABLE_ASSEMBLY=1;XNN_ENABLE_MEMOPT=1;XNN_ENABLE_SPARSE=1;XNN_ENABLE_GEMM_M_SPECIALIZATION=1;XNN_ENABLE_DWCONV_MULTIPASS=0;XNN_ENABLE_HVX=1;XNN_ENABLE_KLEIDIAI=0;XNN_ENABLE_CPUINFO=1;XNN_LOG_LEVEL=4;FXDIV_USE_INLINE_ASSEMBLY=0;PTHREADPOOL_NO_DEPRECATED_API=1;CPUINFO_SUPPORTED_PLATFORM=1;CPUINFO_LOG_TO_STDIO=1;CPUINFO_LOG_LEVEL=2;_WIN32_WINNT=0x0601;NOMINMAX=1;NOGDI=1;WIN32_LEAN_AND_MEAN=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..;$(ProjectDir)\..\include;$(ProjectDir)\..\src;$(ProjectDir)\..\..\FP16\include;$(ProjectDir)\..\..\FXdiv\include;$(ProjectDir)\..\..\pthreadpool\include;$(ProjectDir)\..\..\cpuinfo\include;$(ProjectDir)\..\..\cpuinfo\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AssemblerListingLocation>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</ObjectFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <AdditionalOptions>-mavxvnni -mavxvnniint8 -mavx512fp16 -mavx512vnni -mavx512vbmi  -mgfni -mamx-tile -mamx-int8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>XNN_ENABLE_ARM_FP16_VECTOR=0;XNN_ENABLE_ARM_FP16_SCALAR=0;XNN_ENABLE_ARM_BF16=0;XNN_ENABLE_ARM_DOTPROD=0;XNN_ENABLE_ARM_I8MM=0;XNN_ENABLE_RISCV_VECTOR=1;XNN_ENABLE_AVXVNNI=1;XNN_ENABLE_AVXVNNIINT8=1;XNN_ENABLE_AVX256SKX=1;XNN_ENABLE_AVX256VNNI=1;XNN_ENABLE_AVX256VNNIGFNI=1;XNN_ENABLE_AVX512VNNIGFNI=1;XNN_ENABLE_AVX512AMX=1;XNN_ENABLE_AVX512FP16=1;XNN_ENABLE_VSX=1;XNN_ENABLE_ASSEMBLY=1;XNN_ENABLE_MEMOPT=1;XNN_ENABLE_SPARSE=1;XNN_ENABLE_GEMM_M_SPECIALIZATION=1;XNN_ENABLE_DWCONV_MULTIPASS=0;XNN_ENABLE_HVX=1;XNN_ENABLE_KLEIDIAI=0;XNN_ENABLE_CPUINFO=1;XNN_LOG_LEVEL=4;FXDIV_USE_INLINE_ASSEMBLY=0;PTHREADPOOL_NO_DEPRECATED_API=1;CPUINFO_SUPPORTED_PLATFORM=1;CPUINFO_LOG_TO_STDIO=1;CPUINFO_LOG_LEVEL=2;_WIN32_WINNT=0x0601;NOMINMAX=1;NOGDI=1;WIN32_LEAN_AND_MEAN=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..;$(ProjectDir)\..\include;$(ProjectDir)\..\src;$(ProjectDir)\..\..\FP16\include;$(ProjectDir)\..\..\FXdiv\include;$(ProjectDir)\..\..\pthreadpool\include;$(ProjectDir)\..\..\cpuinfo\include;$(ProjectDir)\..\..\cpuinfo\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AssemblerListingLocation>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)\$(ProjectName)\$(ProjectName)\%(RelativeDir)\</ObjectFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <AdditionalOptions>-mavxvnni -mavxvnniint8 -mavx512fp16 -mavx512vnni -mavx512vbmi  -mgfni -mamx-tile -mamx-int8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\f16-f32-vcvt\gen\f16-f32-vcvt-avx512skx-u16.c" />
+    <ClCompile Include="..\src\f16-f32-vcvt\gen\f16-f32-vcvt-avx512skx-u32.c" />
+    <ClCompile Include="..\src\f16-f32acc-rdsum\gen\f16-f32acc-rdsum-7p7x-avx512skx-c128.c" />
+    <ClCompile Include="..\src\f16-f32acc-rdsum\gen\f16-f32acc-rdsum-7p7x-avx512skx-c16.c" />
+    <ClCompile Include="..\src\f16-f32acc-rdsum\gen\f16-f32acc-rdsum-7p7x-avx512skx-c32.c" />
+    <ClCompile Include="..\src\f16-f32acc-rdsum\gen\f16-f32acc-rdsum-7p7x-avx512skx-c64.c" />
+    <ClCompile Include="..\src\f16-f32acc-rsum\gen\f16-f32acc-rsum-avx512skx-u128-acc4.c" />
+    <ClCompile Include="..\src\f16-f32acc-rsum\gen\f16-f32acc-rsum-avx512skx-u16.c" />
+    <ClCompile Include="..\src\f16-f32acc-rsum\gen\f16-f32acc-rsum-avx512skx-u32-acc2.c" />
+    <ClCompile Include="..\src\f16-f32acc-rsum\gen\f16-f32acc-rsum-avx512skx-u48-acc3.c" />
+    <ClCompile Include="..\src\f16-f32acc-rsum\gen\f16-f32acc-rsum-avx512skx-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-f32acc-rsum\gen\f16-f32acc-rsum-avx512skx-u64-acc4.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-1x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-1x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-4x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-4x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-5x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-5x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-6x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-6x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-7x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-7x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-8x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-gemm\gen\f16-gemm-8x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-1x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-1x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-4x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-4x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-5x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-5x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-6x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-6x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-7x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-7x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-8x32-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-igemm\gen\f16-igemm-8x64-minmax-avx512fp16-broadcast.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512fp16-u128-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512fp16-u128-acc4.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512fp16-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512fp16-u96-acc3.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512skx-u16.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512skx-u32-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512skx-u48-acc3.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512skx-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmax-avx512skx-u64-acc4.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512fp16-u128-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512fp16-u128-acc4.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512fp16-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512fp16-u96-acc3.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512skx-u16.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512skx-u32-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512skx-u48-acc3.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512skx-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rmin-avx512skx-u64-acc4.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512fp16-u128-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512fp16-u128-acc4.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512fp16-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512fp16-u96-acc3.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512skx-u16.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512skx-u32-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512skx-u48-acc3.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512skx-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rminmax\gen\f16-rminmax-avx512skx-u64-acc4.c" />
+    <ClCompile Include="..\src\f16-rsum\gen\f16-rsum-avx512fp16-u128-acc2.c" />
+    <ClCompile Include="..\src\f16-rsum\gen\f16-rsum-avx512fp16-u128-acc4.c" />
+    <ClCompile Include="..\src\f16-rsum\gen\f16-rsum-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-rsum\gen\f16-rsum-avx512fp16-u64-acc2.c" />
+    <ClCompile Include="..\src\f16-rsum\gen\f16-rsum-avx512fp16-u96-acc3.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vadd-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vadd-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vaddc-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vaddc-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vdiv-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vdiv-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vdivc-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vdivc-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmaxc-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmaxc-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmin-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmin-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vminc-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vminc-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmul-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmul-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmulc-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vmulc-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vprelu-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vprelu-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vpreluc-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vpreluc-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vrdivc-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vrdivc-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vrpreluc-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vrpreluc-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vrsubc-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vrsubc-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsqrdiff-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsqrdiff-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsqrdiffc-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsqrdiffc-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsub-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsub-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsubc-minmax-avx512fp16-u32.c" />
+    <ClCompile Include="..\src\f16-vbinary\gen\f16-vsubc-minmax-avx512fp16-u64.c" />
+    <ClCompile Include="..\src\f16-vsqrt\gen\f16-vsqrt-avx512fp16-sqrt-u128.c" />
+    <ClCompile Include="..\src\f16-vsqrt\gen\f16-vsqrt-avx512fp16-sqrt-u32.c" />
+    <ClCompile Include="..\src\f16-vsqrt\gen\f16-vsqrt-avx512fp16-sqrt-u64.c" />
+    <ClCompile Include="..\src\f16-vsqrt\gen\f16-vsqrt-avx512skx-sqrt-u16.c" />
+    <ClCompile Include="..\src\f16-vsqrt\gen\f16-vsqrt-avx512skx-sqrt-u32.c" />
+    <ClCompile Include="..\src\f16-vsqrt\gen\f16-vsqrt-avx512skx-sqrt-u64.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-25p16c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-25p16c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-25p32c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-25p32c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-3p16c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-3p16c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-3p32c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-3p32c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-4p16c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-4p16c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-4p32c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-4p32c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-5f5m5l16c16s1r-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-5f5m5l16c16s1r-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-5f5m5l32c16s1r-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-5f5m5l32c16s1r-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-9p16c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-9p16c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-9p32c-minmax-avx512f-acc2.c" />
+    <ClCompile Include="..\src\f32-dwconv\gen\f32-dwconv-9p32c-minmax-avx512f.c" />
+    <ClCompile Include="..\src\f32-f16-vcvt\gen\f32-f16-vcvt-avx512skx-u16.c" />
+    <ClCompile Include="..\src\f32-f16-vcvt\gen\f32-f16-vcvt-avx512skx-u32.c" />
+    <ClCompile Include="..\src\f32-gemminc\gen\f32-gemminc-1x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemminc\gen\f32-gemminc-4x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemminc\gen\f32-gemminc-5x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemminc\gen\f32-gemminc-6x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemminc\gen\f32-gemminc-7x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemminc\gen\f32-gemminc-8x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemm\gen\f32-gemm-1x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemm\gen\f32-gemm-4x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemm\gen\f32-gemm-5x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemm\gen\f32-gemm-6x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemm\gen\f32-gemm-7x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-gemm\gen\f32-gemm-8x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-igemm\gen\f32-igemm-1x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-igemm\gen\f32-igemm-4x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-igemm\gen\f32-igemm-5x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-igemm\gen\f32-igemm-6x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-igemm\gen\f32-igemm-7x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-igemm\gen\f32-igemm-8x16-minmax-avx512f-broadcast.c" />
+    <ClCompile Include="..\src\f32-prelu\gen\f32-prelu-avx512f-2x16.c" />
+    <ClCompile Include="..\src\f32-prelu\gen\f32-prelu-avx512f-2x32.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-1x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-2x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-3x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-4x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-5x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-6x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-7x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc4w-gemm-8x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-1x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-1x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-2x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-2x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-3x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-3x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-4x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-4x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-5x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-5x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-6x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-6x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-7x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-7x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-8x16-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qc8w-gemm\gen\f32-qc8w-gemm-8x32-minmax-avx512skx-broadcast.c" />
+    <ClCompile Include="..\src\f32-qs8-vcvt\gen\f32-qs8-vcvt-avx512skx-u128.c" />
+    <ClCompile Include="..\src\f32-qs8-vcvt\gen\f32-qs8-vcvt-avx512skx-u32.c" />
+    <ClCompile Include="..\src\f32-qs8-vcvt\gen\f32-qs8-vcvt-avx512skx-u64.c" />
+    <ClCompile Include="..\src\f32-qs8-vcvt\gen\f32-qs8-vcvt-avx512skx-u96.c" />
+    <ClCompile Include="..\src\f32-qu8-vcvt\gen\f32-qu8-vcvt-avx512skx-u128.c" />
+    <ClCompile Include="..\src\f32-qu8-vcvt\gen\f32-qu8-vcvt-avx512skx-u32.c" />
+    <ClCompile Include="..\src\f32-qu8-vcvt\gen\f32-qu8-vcvt-avx512skx-u64.c" />
+    <ClCompile Include="..\src\f32-qu8-vcvt\gen\f32-qu8-vcvt-avx512skx-u96.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u128-acc2.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u128-acc4.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u128.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u144-acc3.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u144.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u160-acc2.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u160-acc5.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u160.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u192-acc2.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u192-acc3.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u192-acc6.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u192.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-raddexpminusmax\gen\f32-raddexpminusmax-avx512f-p5-scalef-u64.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u128-acc2.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u128-acc4.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u128.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u144-acc3.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u144.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u160-acc2.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u160-acc5.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u160.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u192-acc2.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u192-acc3.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u192-acc6.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u192.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-raddextexp\gen\f32-raddextexp-avx512f-p5-scalef-u64.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u128-acc2.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u128-acc4.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u128.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u144-acc3.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u144.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u160-acc2.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u160-acc5.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u160.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u192-acc2.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u192-acc3.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u192-acc6.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u192.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-raddstoreexpminusmax\gen\f32-raddstoreexpminusmax-avx512f-rr1-p5-scalef-u64.c" />
+    <ClCompile Include="..\src\f32-rdsum\gen\f32-rdsum-7p7x-minmax-avx512f-c128.c" />
+    <ClCompile Include="..\src\f32-rdsum\gen\f32-rdsum-7p7x-minmax-avx512f-c16.c" />
+    <ClCompile Include="..\src\f32-rdsum\gen\f32-rdsum-7p7x-minmax-avx512f-c32.c" />
+    <ClCompile Include="..\src\f32-rdsum\gen\f32-rdsum-7p7x-minmax-avx512f-c64.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmax-avx512f-u32-acc2.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmax-avx512f-u48-acc3.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmax-avx512f-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmax-avx512f-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmin-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmin-avx512f-u32-acc2.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmin-avx512f-u48-acc3.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmin-avx512f-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rmin-avx512f-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rminmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rminmax-avx512f-u32-acc2.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rminmax-avx512f-u48-acc3.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rminmax-avx512f-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-rminmax\gen\f32-rminmax-avx512f-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-rsum\gen\f32-rsum-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-rsum\gen\f32-rsum-avx512f-u32-acc2.c" />
+    <ClCompile Include="..\src\f32-rsum\gen\f32-rsum-avx512f-u48-acc3.c" />
+    <ClCompile Include="..\src\f32-rsum\gen\f32-rsum-avx512f-u64-acc2.c" />
+    <ClCompile Include="..\src\f32-rsum\gen\f32-rsum-avx512f-u64-acc4.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vadd-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vadd-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vaddc-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vaddc-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vdiv-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vdiv-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vdivc-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vdivc-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmaxc-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmaxc-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmin-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmin-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vminc-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vminc-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmul-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmul-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmulc-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vmulc-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vprelu-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vprelu-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vpreluc-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vpreluc-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vrdivc-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vrdivc-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vrpreluc-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vrpreluc-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vrsubc-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vrsubc-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsqrdiff-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsqrdiff-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsqrdiffc-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsqrdiffc-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsub-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsub-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsubc-minmax-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vbinary\gen\f32-vsubc-minmax-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vclamp\gen\f32-vclamp-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vclamp\gen\f32-vclamp-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vcmul\gen\f32-vcmul-avx512f-u128.c" />
+    <ClCompile Include="..\src\f32-vcmul\gen\f32-vcmul-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vcmul\gen\f32-vcmul-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vcmul\gen\f32-vcmul-avx512f-u64.c" />
+    <ClCompile Include="..\src\f32-vcopysign\gen\f32-vcopysign-avx512f.c" />
+    <ClCompile Include="..\src\f32-vcopysign\gen\f32-vcopysignc-avx512f.c" />
+    <ClCompile Include="..\src\f32-vcopysign\gen\f32-vrcopysignc-avx512f.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u112.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u128.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u16.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u32.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u48.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u64.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u80.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-lut16-p3-perm-u96.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u112.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u128.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u16.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u32.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u48.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u64.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u80.c" />
+    <ClCompile Include="..\src\f32-velu\gen\f32-velu-avx512f-rr1-p6-u96.c" />
+    <ClCompile Include="..\src\f32-vgelu\gen\f32-vgelu-avx512f-rational-12-10-div.c" />
+    <ClCompile Include="..\src\f32-vgelu\gen\f32-vgelu-avx512f-rational-12-10-nr.c" />
+    <ClCompile Include="..\src\f32-vhswish\gen\f32-vhswish-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vhswish\gen\f32-vhswish-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vlog\gen\f32-vlog-avx512f-rational-3-3-div.c" />
+    <ClCompile Include="..\src\f32-vlog\gen\f32-vlog-avx512f-rational-3-3-nr.c" />
+    <ClCompile Include="..\src\f32-vlrelu\gen\f32-vlrelu-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vlrelu\gen\f32-vlrelu-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vrelu\gen\f32-vrelu-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vrelu\gen\f32-vrelu-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndd-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndd-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndne-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndne-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndu-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndu-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndz-avx512f-u16.c" />
+    <ClCompile Include="..\src\f32-vrnd\gen\f32-vrndz-avx512f-u32.c" />
+    <ClCompile Include="..\src\f32-vrsqrt\gen\f32-vrsqrt-avx512f-rsqrt-u16.c" />
+    <ClCompile Include="..\src\f32-vrsqrt\gen\f32-vrsqrt-avx512f-rsqrt-u32.c" />
+    <ClCompile Include="..\src\f32-vrsqrt\gen\f32-vrsqrt-avx512f-rsqrt-u64.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u112.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u128.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u144.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u16.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u160.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u176.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u192.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u32.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u48.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u64.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u80.c" />
+    <ClCompile Include="..\src\f32-vscaleexpminusmax\gen\f32-vscaleexpminusmax-avx512f-p5-scalef-u96.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u112.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u128.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u144.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u16.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u160.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u176.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u192.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u32.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u48.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u64.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u80.c" />
+    <ClCompile Include="..\src\f32-vscaleextexp\gen\f32-vscaleextexp-avx512f-p5-scalef-u96.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u112.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u128.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u16.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u32.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u48.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u64.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u80.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-div-u96.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u112.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u128.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u16.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u32.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u48.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u64.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u80.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-lut16-p3-perm-scalef-nr1fma-u96.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u112.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u128.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u16.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u32.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u48.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u64.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u80.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-div-u96.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u112.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u128.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u16.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u32.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u48.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u64.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u80.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr1-p5-scalef-nr1fma-u96.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u112.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u128.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u16.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u32.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u48.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u64.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u80.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-div-u96.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u112.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u128.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u16.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u32.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u48.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u64.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u80.c" />
+    <ClCompile Include="..\src\f32-vsigmoid\gen\f32-vsigmoid-avx512f-rr2-lut32-p2-perm2-scalef-nr1fma-u96.c" />
+    <ClCompile Include="..\src\f32-vsqrt\gen\f32-vsqrt-avx512f-rsqrt-u16.c" />
+    <ClCompile Include="..\src\f32-vsqrt\gen\f32-vsqrt-avx512f-rsqrt-u32.c" />
+    <ClCompile Include="..\src\f32-vsqrt\gen\f32-vsqrt-avx512f-rsqrt-u48.c" />
+    <ClCompile Include="..\src\f32-vtanh\gen\f32-vtanh-avx512f-rational-9-8-div.c" />
+    <ClCompile Include="..\src\f32-vtanh\gen\f32-vtanh-avx512f-rational-9-8-nr.c" />
+    <ClCompile Include="..\src\f32-vunary\gen\f32-vabs-avx512f.c" />
+    <ClCompile Include="..\src\f32-vunary\gen\f32-vneg-avx512f.c" />
+    <ClCompile Include="..\src\f32-vunary\gen\f32-vsqr-avx512f.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-10x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-10x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-10x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-10x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-10x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-10x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-12x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-12x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-12x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-12x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-12x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-12x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-14x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-14x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-14x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-14x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-14x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-14x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-1x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-2x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-2x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-2x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-3x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-3x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-3x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-4x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-4x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-4x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-5x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-6x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-6x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-6x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-7x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-8x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-9x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-9x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-9x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-9x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-9x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc4w-gemm\gen\qd8-f16-qc4w-gemm-9x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-10x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-10x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-12x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-12x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-14x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-14x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-16x64c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-16x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-1x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-1x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-1x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-1x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-1x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-1x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-2x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-2x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-3x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-3x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-4x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-4x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-5x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-5x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-5x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-5x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-5x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-6x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-6x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-7x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-7x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-7x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-7x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-7x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-7x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-8x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-8x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-8x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-8x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-8x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-9x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-gemm\gen\qd8-f16-qc8w-gemm-9x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-10x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-10x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-12x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-12x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-14x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-14x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-16x64c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-16x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-1x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-1x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-1x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-1x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-1x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-1x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-2x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-2x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-3x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-3x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-4x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-4x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-5x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-5x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-5x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-5x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-5x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-6x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-6x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-7x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-7x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-7x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-7x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-7x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-7x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-8x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-8x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-8x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-8x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-8x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-9x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f16-qc8w-igemm\gen\qd8-f16-qc8w-igemm-9x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-10x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-10x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-10x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-10x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-12x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-12x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-12x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-12x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-14x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-14x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-14x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-14x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-1x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-1x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-1x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-1x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-5x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-5x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-5x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-5x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-7x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-7x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-7x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-7x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-8x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-8x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-8x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-8x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-9x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-9x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-9x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qb4w-gemm\gen\qd8-f32-qb4w-gemm-9x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-10x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-12x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-14x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-16x16c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-16x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-16x32c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-16x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-16x64c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-16x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-1x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-2x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-2x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-2x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-3x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-3x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-3x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-4x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-5x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-6x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-6x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-6x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-7x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-8x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c4-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c4-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c4-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c4-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c8-minmax-avx512skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c8-minmax-avx512skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c8-minmax-avx512vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x16c8-minmax-avx512vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x8c8-minmax-avx256skx-madd-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x8c8-minmax-avx256skx-madd.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x8c8-minmax-avx256vnnigfni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc4w-gemm\gen\qd8-f32-qc4w-gemm-9x8c8-minmax-avx256vnnigfni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-10x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-10x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-10x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-10x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-10x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-10x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-12x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-12x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-12x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-12x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-12x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-12x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-14x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-14x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-14x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-14x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-14x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-14x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-16x16c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-16x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-16x32c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-16x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-16x64c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-16x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-1x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-2x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-2x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-2x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-2x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-3x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-3x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-3x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-3x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-4x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-4x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-4x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-4x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-4x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-4x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-5x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-6x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-6x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-6x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-6x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-7x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c4-minmax-avxvnni-u2-acc2.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c4-minmax-avxvnni-u4-acc4.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-8x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-9x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-9x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-9x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-9x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-9x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-gemm\gen\qd8-f32-qc8w-gemm-9x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-10x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-10x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-10x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-10x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-10x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-10x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-12x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-12x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-12x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-12x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-12x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-12x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-14x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-14x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-14x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-14x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-14x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-14x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-16x16c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-16x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-16x32c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-16x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-16x64c4-minmax-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-16x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-1x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-2x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-2x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-3x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-3x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-4x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-4x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-4x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-4x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-5x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-6x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-6x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x32c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x64c4-minmax-avx512amx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-7x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x16c8-minmax-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x16c8-minmax-avx512skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x8c8-minmax-avx256skx.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x8c8-minmax-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-8x8c8-minmax-avxvnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-9x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-9x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-9x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-9x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-9x8c8-minmax-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qd8-f32-qc8w-igemm\gen\qd8-f32-qc8w-igemm-9x8c8-minmax-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-25p16c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-25p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-5f5m5l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-5f5m5l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-6f6m7l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-6f6m7l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-8f8m9l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-8f8m9l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-9p16c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-dwconv\gen\qs8-dwconv-9p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-f32-vcvt\gen\qs8-f32-vcvt-avx512skx-u16.c" />
+    <ClCompile Include="..\src\qs8-f32-vcvt\gen\qs8-f32-vcvt-avx512skx-u32.c" />
+    <ClCompile Include="..\src\qs8-f32-vcvt\gen\qs8-f32-vcvt-avx512skx-u48.c" />
+    <ClCompile Include="..\src\qs8-f32-vcvt\gen\qs8-f32-vcvt-avx512skx-u64.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-25p16c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-25p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-3p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-5f5m5l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-5f5m5l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-6f6m7l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-6f6m7l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-8f8m9l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-8f8m9l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-9p16c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-dwconv\gen\qs8-qc8w-dwconv-9p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-10x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-10x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-10x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-10x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-10x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-10x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-12x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-12x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-12x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-12x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-12x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-12x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-14x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-14x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-14x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-14x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-14x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-14x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-16x16c4-minmax-fp32-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-16x16c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-16x32c4-minmax-fp32-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-16x32c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-16x64c4-minmax-fp32-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-16x64c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x32c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x64c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-1x8c8-minmax-fp32-avxvnniint8-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-2x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-2x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-2x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-3x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-3x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-3x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-4x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-4x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-4x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-4x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-4x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-5x8c8-minmax-fp32-avxvnniint8-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-6x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-6x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x32c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x64c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-7x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-8x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-9x16c4-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-9x16c4-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-9x16c8-minmax-fp32-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-9x16c8-minmax-fp32-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-9x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-gemm\gen\qs8-qc8w-gemm-9x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-10x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-10x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-10x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-10x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-10x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-10x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-12x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-12x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-12x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-12x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-12x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-12x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-14x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-14x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-14x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-14x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-14x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-14x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-16x16c4-minmax-fp32-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-16x16c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-16x32c4-minmax-fp32-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-16x32c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-16x64c4-minmax-fp32-avx512amx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-16x64c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x32c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x64c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-1x8c8-minmax-fp32-avxvnniint8-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-2x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-2x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-2x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-3x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-3x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-3x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-4x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-4x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-4x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-4x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-4x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-5x8c8-minmax-fp32-avxvnniint8-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-6x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-6x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x32c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x64c4-minmax-fp32-avx512amx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-7x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x8c8-minmax-fp32-avxvnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-8x8c8-minmax-fp32-avxvnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-9x16c4-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-9x16c4-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-9x16c8-minmax-avx512vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-9x16c8-minmax-avx512vnni.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-9x8c8-minmax-fp32-avx256vnni-prfm.c" />
+    <ClCompile Include="..\src\qs8-qc8w-igemm\gen\qs8-qc8w-igemm-9x8c8-minmax-fp32-avx256vnni.c" />
+    <ClCompile Include="..\src\qs8-rdsum\gen\qs8-rdsum-7p7x-minmax-fp32-avx512skx-c128.c" />
+    <ClCompile Include="..\src\qs8-rdsum\gen\qs8-rdsum-7p7x-minmax-fp32-avx512skx-c64.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256skx-u128-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256skx-u128-acc4.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256skx-u128.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256skx-u32.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256skx-u64-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256skx-u64.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256vnni-u128-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256vnni-u128-acc4.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256vnni-u128.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256vnni-u32.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256vnni-u64-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx256vnni-u64.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512skx-u128-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512skx-u128.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512skx-u256-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512skx-u256-acc4.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512skx-u256.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512skx-u64.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512vnni-u128-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512vnni-u128.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512vnni-u256-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512vnni-u256-acc4.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512vnni-u256.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avx512vnni-u64.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avxvnni-u128-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avxvnni-u128-acc4.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avxvnni-u128.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avxvnni-u32.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avxvnni-u64-acc2.c" />
+    <ClCompile Include="..\src\qs8-rsum\gen\qs8-rsum-avxvnni-u64.c" />
+    <ClCompile Include="..\src\qs8-vaddc\gen\qs8-vaddc-minmax-avx512skx-mul32-ld128-u16.c" />
+    <ClCompile Include="..\src\qs8-vaddc\gen\qs8-vaddc-minmax-avx512skx-mul32-ld128-u32.c" />
+    <ClCompile Include="..\src\qs8-vadd\gen\qs8-vadd-minmax-avx512skx-mul32-ld128-u16.c" />
+    <ClCompile Include="..\src\qs8-vadd\gen\qs8-vadd-minmax-avx512skx-mul32-ld128-u32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-25p16c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-25p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-5f5m5l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-5f5m5l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-6f6m7l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-6f6m7l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-8f8m9l16c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-8f8m9l32c16s1r-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-9p16c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-dwconv\gen\qu8-dwconv-9p32c-minmax-fp32-avx512skx-mul32.c" />
+    <ClCompile Include="..\src\qu8-f32-vcvt\gen\qu8-f32-vcvt-avx512skx-u16.c" />
+    <ClCompile Include="..\src\qu8-f32-vcvt\gen\qu8-f32-vcvt-avx512skx-u32.c" />
+    <ClCompile Include="..\src\qu8-f32-vcvt\gen\qu8-f32-vcvt-avx512skx-u48.c" />
+    <ClCompile Include="..\src\qu8-f32-vcvt\gen\qu8-f32-vcvt-avx512skx-u64.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-1x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-1x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-1x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-5x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-5x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-7x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-7x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-8x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-gemm\gen\qu8-gemm-8x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-1x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-1x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-1x8c8-minmax-fp32-avx256skx.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-5x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-5x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-7x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-7x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-8x16c8-minmax-fp32-avx512skx-prfm.c" />
+    <ClCompile Include="..\src\qu8-igemm\gen\qu8-igemm-8x16c8-minmax-fp32-avx512skx.c" />
+    <ClCompile Include="..\src\qu8-vaddc\gen\qu8-vaddc-minmax-avx512skx-mul32-ld128-u16.c" />
+    <ClCompile Include="..\src\qu8-vaddc\gen\qu8-vaddc-minmax-avx512skx-mul32-ld128-u32.c" />
+    <ClCompile Include="..\src\qu8-vadd\gen\qu8-vadd-minmax-avx512skx-mul32-ld128-u16.c" />
+    <ClCompile Include="..\src\qu8-vadd\gen\qu8-vadd-minmax-avx512skx-mul32-ld128-u32.c" />
+    <ClCompile Include="..\src\s32-f32-vcvt\gen\s32-f32-vcvt-avx512f.c" />
+    <ClCompile Include="..\src\s32-vmul\gen\s32-vmul-avx512f.c" />
+    <ClCompile Include="..\src\s32-vmul\gen\s32-vmulc-avx512f.c" />
+    <ClCompile Include="..\src\x32-packw\gen\x32-packw-x16-gemm-goi-avx512f-u4-prfm.c" />
+    <ClCompile Include="..\src\x32-packw\gen\x32-packw-x16-gemm-goi-avx512f-u4.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512skx-vpshufb-u128.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512skx-vpshufb-u192.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512skx-vpshufb-u256.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512skx-vpshufb-u64.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512vbmi-vpermx2b-u128.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512vbmi-vpermx2b-u192.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512vbmi-vpermx2b-u256.c" />
+    <ClCompile Include="..\src\x8-lut\gen\x8-lut-avx512vbmi-vpermx2b-u64.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
